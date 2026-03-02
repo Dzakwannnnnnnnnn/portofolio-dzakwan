@@ -2,7 +2,7 @@
   <div class="footer-container">
 
     <div class="footer-top">
-      <h3 class="footer-logo">Dzakwan</h3>
+      <h3 class="footer-logo">Muhammad Dzakwan</h3>
       <p class="footer-desc">
         Full-stack Developer yang fokus membuat produk digital
         yang sederhana, cepat, dan indah digunakan.

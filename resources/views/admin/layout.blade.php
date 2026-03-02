@@ -7,6 +7,9 @@
 
   <title>Admin Panel</title>
 
+  {{-- Bootstrap CSS --}}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
 </head>
@@ -27,6 +30,7 @@
         <a href="/admin">Dashboard</a>
         <a href="/admin/profile">Profile</a>
         <a href="/admin/projects">Projects</a>
+        <a href="/admin/documentations">Dokumentasi</a>
         <a href="/">View Website</a>
 
         <form method="POST" action="{{ route('logout') }}">
