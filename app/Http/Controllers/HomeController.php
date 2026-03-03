@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PersonalProfile;
 use App\Models\Projects;
-use App\Models\Educations;
+use App\Models\Education;
 use Illuminate\Routing\Controller;
 
 class HomeController extends Controller
@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $profile = PersonalProfile::latest()->first();
         $projects = Projects::latest()->get();
-        $educations = Educations::orderBy('start_year', 'desc')->get();
+        $educations = Education::orderBy('start_year', 'desc')->get();
 
         return view('welcome', compact(
             'profile',

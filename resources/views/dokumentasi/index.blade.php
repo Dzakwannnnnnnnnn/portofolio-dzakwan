@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-<div class="container py-5" style="margin-top: 100px;">
+<div class="container py-4" style="margin-top: 80px;">
   <div class="text-center mb-5">
     <h2 class="fw-bold">Dokumentasi Kegiatan</h2>
     <p class="text-muted">Galeri foto dan dokumentasi kegiatan terbaru</p>

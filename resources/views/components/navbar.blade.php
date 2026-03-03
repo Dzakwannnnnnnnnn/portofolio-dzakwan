@@ -30,8 +30,21 @@
 
   .main-navbar {
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    transition: transform 0.3s ease, background 0.3s ease;
     background: #f3f4f6;
-    position: relative;
+  }
+
+  .main-navbar.hidden {
+    transform: translateY(-100%);
+  }
+
+  /* Dark mode support */
+  .dark .main-navbar {
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .nav-container {
@@ -207,5 +220,43 @@
   navToggle.addEventListener('click', () => {
     mainNav.classList.toggle('nav-open');
   });
+
+  // Hide navbar on scroll down (immediately), show after 3 seconds of not scrolling
+  let lastScrollY = window.scrollY;
+  let showTimeout;
+  let isHidden = false;
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    
+    // Clear existing timeout
+    clearTimeout(showTimeout);
+
+    // If at top of page, always show navbar
+    if (currentScrollY <= 0) {
+      mainNav.classList.remove('hidden');
+      isHidden = false;
+      return;
+    }
+
+    if (currentScrollY < lastScrollY && !isHidden) {
+      // Scrolling up - immediately hide navbar
+      mainNav.classList.add('hidden');
+      isHidden = true;
+      // Show again after 1 second
+      setTimeout(() => {
+        mainNav.classList.remove('hidden');
+        isHidden = false;
+      }, 1000);
+    } else if (currentScrollY > lastScrollY && isHidden) {
+      // Scrolling down - show immediately
+      mainNav.classList.remove('hidden');
+      isHidden = false;
+    }
+
+    lastScrollY = currentScrollY;
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
 });
 </script>

@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container py-5" style="margin-top: 100px;">
+<div class="container py-4" style="margin-top: 80px;">
   <div class="mb-4">
     <a href="{{ route('dokumentasi.index') }}" class="btn btn-secondary rounded-pill px-4"
       style="background-color: #6c757d; color: white; border: none;">

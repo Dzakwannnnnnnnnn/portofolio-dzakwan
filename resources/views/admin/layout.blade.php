@@ -19,6 +19,30 @@
       align-items: center;
     }
 
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .theme-toggle-btn {
+      background: #f3f4f6;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .theme-toggle-btn:hover {
+      background: #e5e7eb;
+    }
+
     .sidebar-toggle {
       display: none;
       background: none;
@@ -29,13 +53,9 @@
     }
 
     @media (max-width: 768px) {
-      .admin-wrapper {
-        grid-template-columns: 1fr;
-      }
-
       .sidebar {
         position: fixed;
-        left: -250px;
+        left: -240px;
         /* Hidden by default */
         top: 0;
         height: 100%;
@@ -47,10 +67,6 @@
       .sidebar.active {
         left: 0;
         /* Shown when active */
-      }
-
-      .main {
-        grid-column: 1 / -1;
       }
 
       .sidebar-toggle {
@@ -75,14 +91,14 @@
   <!-- LOADER -->
   <div id="page-loader">
     <div class="loader-content">
-      <div class="loader-logo">Muhammad Dzakwan</div>
+      <div class="loader-logo">Loading...</div>
       <div class="loader-spinner"></div>
     </div>
   </div>
 
   <div class="admin-wrapper">
 
-    @include('admin.components.sidebar')
+    @include('admin.sidebar')
 
 
     {{-- MAIN --}}
@@ -97,9 +113,14 @@
 
         <h2>@yield('title')</h2>
 
-        <span>
-          {{ auth()->user()->name }}
-        </span>
+        <div class="topbar-right">
+          <button id="themeToggleTop" class="theme-toggle-btn" title="Toggle Theme">
+            <span class="theme-icon-top">🌙</span>
+          </button>
+          <span>
+            {{ auth()->user()->name }}
+          </span>
+        </div>
 
       </header>
 
@@ -117,23 +138,62 @@
     document.addEventListener('DOMContentLoaded', function() {
       const sidebar = document.querySelector('.sidebar');
       const sidebarToggle = document.getElementById('sidebarToggle');
-      const mainContent = document.querySelector('.main');
 
-      sidebarToggle.addEventListener('click', function() {
+      sidebarToggle.addEventListener('click', function(event) {
+        event.stopPropagation(); // Mencegah event sampai ke document
         sidebar.classList.toggle('active');
       });
 
-      // Close sidebar if clicking outside of it on mobile
-      mainContent.addEventListener('click', function() {
-        sidebar.classList.remove('active');
+      // Menutup sidebar jika klik di luar area sidebar atau toggle button
+      document.addEventListener('click', function(event) {
+        const isClickInsideSidebar = sidebar.contains(event.target);
+        const isClickOnToggle = sidebarToggle.contains(event.target);
+
+        if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('active')) {
+          sidebar.classList.remove('active');
+        }
+      });
+
+      // Theme toggle functionality
+      const themeToggleTop = document.getElementById('themeToggleTop');
+      const themeIconTop = themeToggleTop.querySelector('.theme-icon-top');
+      
+      // Check saved theme preference
+      const savedTheme = localStorage.getItem('admin-theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        themeIconTop.textContent = '☀️';
+      } else {
+        themeIconTop.textContent = '🌙';
+      }
+
+      themeToggleTop.addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        
+        if (document.body.classList.contains('light-mode')) {
+          localStorage.setItem('admin-theme', 'light');
+          themeIconTop.textContent = '☀️';
+          // Update sidebar toggle if exists
+          const sidebarThemeBtn = document.querySelector('#themeToggle .theme-icon');
+          const sidebarThemeText = document.querySelector('#themeToggle .theme-text');
+          if (sidebarThemeBtn) sidebarThemeBtn.textContent = '☀️';
+          if (sidebarThemeText) sidebarThemeText.textContent = 'Light Mode';
+        } else {
+          localStorage.setItem('admin-theme', 'dark');
+          themeIconTop.textContent = '🌙';
+          // Update sidebar toggle if exists
+          const sidebarThemeBtn = document.querySelector('#themeToggle .theme-icon');
+          const sidebarThemeText = document.querySelector('#themeToggle .theme-text');
+          if (sidebarThemeBtn) sidebarThemeBtn.textContent = '🌙';
+          if (sidebarThemeText) sidebarThemeText.textContent = 'Dark Mode';
+        }
       });
     });
     window.addEventListener("load", function(){
-    const loader = document.getElementById("page-loader");
-    
-    setTimeout(() => {
-    loader.classList.add("loader-hidden");
-    }, 700);
+      const loader = document.getElementById("page-loader");
+      setTimeout(() => {
+        loader.classList.add("loader-hidden");
+      }, 700);
     });
   </script>
 </body>

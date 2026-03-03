@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DocumentationPhoto extends Model
 {
-    protected $fillable = ['documentation_id', 'photo_path'];
+    use HasFactory;
+
+    protected $guarded = [];
 
     public function documentation()
     {
