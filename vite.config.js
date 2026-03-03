@@ -1,20 +1,20 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/css/style.css', 'resources/js/app.js', 'resources/js/script.js'],
             refresh: true,
         }),
-        tailwindcss(),
     ],
     server: {
+        host: '0.0.0.0',
+        hmr: {
+            host: '192.168.1.11',
+        },
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },
     },
 });
-
-
