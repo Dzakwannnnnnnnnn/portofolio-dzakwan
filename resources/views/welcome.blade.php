@@ -6,24 +6,24 @@
 $waRaw = $profile->whatsapp ?? null;
 $waNumber = $waRaw ? preg_replace('/\D+/', '', $waRaw) : null;
 if ($waNumber && \Illuminate\Support\Str::startsWith($waNumber, '0')) {
-    $waNumber = '62' . substr($waNumber, 1);
+$waNumber = '62' . substr($waNumber, 1);
 }
 $waUrl = $waNumber ? 'https://wa.me/' . $waNumber : null;
 
 $githubRaw = $profile->github ?? null;
 $githubUrl = null;
 if (!empty($githubRaw)) {
-    $githubUrl = \Illuminate\Support\Str::startsWith($githubRaw, ['http://', 'https://'])
-        ? $githubRaw
-        : 'https://github.com/' . ltrim($githubRaw, '@/');
+$githubUrl = \Illuminate\Support\Str::startsWith($githubRaw, ['http://', 'https://'])
+? $githubRaw
+: 'https://github.com/' . ltrim($githubRaw, '@/');
 }
 
 $instagramRaw = $profile->instagram ?? null;
 $instagramUrl = null;
 if (!empty($instagramRaw)) {
-    $instagramUrl = \Illuminate\Support\Str::startsWith($instagramRaw, ['http://', 'https://'])
-        ? $instagramRaw
-        : 'https://instagram.com/' . ltrim($instagramRaw, '@/');
+$instagramUrl = \Illuminate\Support\Str::startsWith($instagramRaw, ['http://', 'https://'])
+? $instagramRaw
+: 'https://instagram.com/' . ltrim($instagramRaw, '@/');
 }
 @endphp
 
@@ -146,7 +146,7 @@ if (!empty($instagramRaw)) {
             {{-- DividerLine --}}
             <div class="ktp-divider"></div>
 
-                        {{-- Contact Section --}}
+            {{-- Contact Section --}}
             <div class="ktp-contacts">
 
                 @if(!empty($profile->email))
@@ -246,6 +246,18 @@ if (!empty($instagramRaw)) {
 
         .dark .ios-about-section {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
         }
 
         /* KTP Card */
@@ -545,6 +557,20 @@ if (!empty($instagramRaw)) {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ktp-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .ktp-left {
+                width: 100%;
+                display: flex;
+            }
         }
 
         /* ========== SCROLL ANIMATIONS ========== */
@@ -705,7 +731,8 @@ if (!empty($instagramRaw)) {
                     @endif
 
                     @if(!empty($profile?->phone))
-                    <a href="tel:{{ preg_replace('/\D+/', '', $profile->phone) }}" class="contact-item contact-item-link">
+                    <a href="tel:{{ preg_replace('/\D+/', '', $profile->phone) }}"
+                        class="contact-item contact-item-link">
                         <i class="bi bi-telephone contact-item-icon"></i>
                         <div>
                             <span class="contact-item-label">Telepon</span>
@@ -715,7 +742,8 @@ if (!empty($instagramRaw)) {
                     @endif
 
                     @if(!empty($waUrl))
-                    <a href="{{ $waUrl }}" target="_blank" rel="noopener noreferrer" class="contact-item contact-item-link">
+                    <a href="{{ $waUrl }}" target="_blank" rel="noopener noreferrer"
+                        class="contact-item contact-item-link">
                         <i class="bi bi-whatsapp contact-item-icon"></i>
                         <div>
                             <span class="contact-item-label">WhatsApp</span>
@@ -725,7 +753,8 @@ if (!empty($instagramRaw)) {
                     @endif
 
                     @if(!empty($githubUrl))
-                    <a href="{{ $githubUrl }}" target="_blank" rel="noopener noreferrer" class="contact-item contact-item-link">
+                    <a href="{{ $githubUrl }}" target="_blank" rel="noopener noreferrer"
+                        class="contact-item contact-item-link">
                         <i class="bi bi-github contact-item-icon"></i>
                         <div>
                             <span class="contact-item-label">GitHub</span>
@@ -735,7 +764,8 @@ if (!empty($instagramRaw)) {
                     @endif
 
                     @if(!empty($instagramUrl))
-                    <a href="{{ $instagramUrl }}" target="_blank" rel="noopener noreferrer" class="contact-item contact-item-link">
+                    <a href="{{ $instagramUrl }}" target="_blank" rel="noopener noreferrer"
+                        class="contact-item contact-item-link">
                         <i class="bi bi-instagram contact-item-icon"></i>
                         <div>
                             <span class="contact-item-label">Instagram</span>
@@ -774,5 +804,3 @@ if (!empty($instagramRaw)) {
 </section>
 
 @endsection
-
-

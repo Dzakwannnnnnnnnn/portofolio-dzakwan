@@ -1,3 +1,11 @@
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="loader-content">
+    <div class="loader-logo">Muhammad Dzakwan</div>
+    <div class="loader-spinner"></div>
+  </div>
+</div>
+
 <footer class="ios-footer">
   <div class="footer-container">
 
@@ -27,3 +35,13 @@
 
   </div>
 </footer>
+
+<script>
+  window.addEventListener("load", function() {
+    const loader = document.getElementById("page-loader");
+
+    setTimeout(() => {
+      loader.classList.add("loader-hidden");
+    }, 500);
+  });
+</script>

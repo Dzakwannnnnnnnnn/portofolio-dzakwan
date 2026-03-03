@@ -8,13 +8,13 @@
 
   <div class="card">
     <h3>Projects</h3>
-    <p>{{ \App\Models\Project::count() }}</p>
+    <p>{{\App\Models\Project::count() }}</p>
     <a href="/admin/projects">Manage</a>
   </div>
 
   <div class="card">
     <h3>Education</h3>
-    <p>{{ \App\Models\Education::count() }}</p>
+    <p>{{\App\Models\Education::count() }}</p>
   </div>
 
   <div class="card">
