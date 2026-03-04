@@ -262,6 +262,33 @@
     </div>
 
     <div class="form-group">
+      <label for="experience_years">Jumlah Pengalaman (Tahun)</label>
+      <input type="number" id="experience_years" name="experience_years" min="0" placeholder="e.g. 2" value="{{ old('experience_years', $profile->experience_years ?? 0) }}">
+      <span class="help-text">Jumlah tahun pengalaman programming</span>
+      @error('experience_years')
+      <span class="help-text" style="color: #f44336;">{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <label for="total_projects">Jumlah Project</label>
+      <input type="number" id="total_projects" name="total_projects" min="0" placeholder="e.g. 12" value="{{ old('total_projects', $profile->total_projects ?? 0) }}">
+      <span class="help-text">Total project yang pernah dikerjakan</span>
+      @error('total_projects')
+      <span class="help-text" style="color: #f44336;">{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <label for="total_certifications">Jumlah Sertifikasi</label>
+      <input type="number" id="total_certifications" name="total_certifications" min="0" placeholder="e.g. 5" value="{{ old('total_certifications', $profile->total_certifications ?? 0) }}">
+      <span class="help-text">Total sertifikasi yang dimiliki</span>
+      @error('total_certifications')
+      <span class="help-text" style="color: #f44336;">{{ $message }}</span>
+      @enderror
+    </div>
+
+    <div class="form-group">
       <label for="photo">Foto Profil</label>
 
       @if($profile->photo)
@@ -273,6 +300,7 @@
 
       <input type="file" id="photo" name="photo" accept="image/*">
       <span class="help-text">Upload foto profil baru (JPG, PNG, GIF). Maksimal 5MB</span>
+      <span id="photo-size-warning" class="help-text" style="color: #f44336; display: none;">Ukuran foto maksimal 5MB.</span>
       @error('photo')
       <span class="help-text" style="color: #f44336;">{{ $message }}</span>
       @enderror
@@ -285,5 +313,25 @@
   </form>
 </div>
 
-@endsection
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const photoInput = document.getElementById('photo');
+    const warning = document.getElementById('photo-size-warning');
 
+    if (!photoInput || !warning) return;
+
+    photoInput.addEventListener('change', function() {
+      const file = this.files && this.files[0];
+      const maxSize = 5 * 1024 * 1024;
+
+      if (file && file.size > maxSize) {
+        warning.style.display = 'block';
+        this.value = '';
+      } else {
+        warning.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+@endsection

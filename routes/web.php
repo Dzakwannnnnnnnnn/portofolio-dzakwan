@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\CapabilityController;
+use App\Http\Controllers\Admin\CertificationController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\DocumentationController;
@@ -38,6 +41,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::resource('profile', ProfileController::class);
     Route::resource('projects', ProjectController::class);
+    Route::resource('educations', EducationController::class)->except(['show']);
+    Route::resource('capabilities', CapabilityController::class)->except(['show']);
+    Route::resource('certifications', CertificationController::class)->except(['show']);
 
 });
 

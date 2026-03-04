@@ -100,6 +100,36 @@
     overflow-y: auto;
   }
 
+  .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .profile-stat {
+    background: #f7f9ff;
+    border: 1px solid #e3e8ff;
+    border-radius: 6px;
+    padding: 8px 6px;
+    text-align: center;
+  }
+
+  .profile-stat-number {
+    display: block;
+    color: #1d4ed8;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .profile-stat-label {
+    display: block;
+    color: #666;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
   .about-label {
     font-weight: 600;
     color: #333;
@@ -197,6 +227,21 @@
       <div class="about-label">About</div>
       <div class="profile-about">
         {{ $profile->about ? Str::limit($profile->about, 150) : 'No about information' }}
+      </div>
+
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <span class="profile-stat-number">{{ $profile->experience_years ?? 0 }}</span>
+          <span class="profile-stat-label">Pengalaman</span>
+        </div>
+        <div class="profile-stat">
+          <span class="profile-stat-number">{{ $profile->total_projects ?? 0 }}</span>
+          <span class="profile-stat-label">Project</span>
+        </div>
+        <div class="profile-stat">
+          <span class="profile-stat-number">{{ $profile->total_certifications ?? 0 }}</span>
+          <span class="profile-stat-label">Sertifikasi</span>
+        </div>
       </div>
     </div>
 

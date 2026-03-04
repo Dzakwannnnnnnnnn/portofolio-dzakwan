@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\HireMeMail;
+use App\Models\Capability;
+use App\Models\Certification;
 use App\Models\PersonalProfile;
 use App\Models\Project;
 use App\Models\Education;
@@ -17,11 +19,15 @@ class HomeController extends Controller
         $profile = PersonalProfile::latest()->first();
         $projects = Project::latest()->get();
         $educations = Education::orderBy('start_year', 'desc')->get();
+        $capabilities = Capability::latest()->get();
+        $certifications = Certification::orderBy('year', 'desc')->latest()->get();
 
         return view('welcome', compact(
             'profile',
             'projects',
-            'educations'
+            'educations',
+            'capabilities',
+            'certifications'
         ));
     }
 

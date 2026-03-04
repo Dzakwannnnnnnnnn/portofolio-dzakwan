@@ -19,6 +19,9 @@ class PersonalProfile extends Model
         'birth_date',
         'last_education',
         'location',
+        'experience_years',
+        'total_projects',
+        'total_certifications',
         'github',
         'instagram'
     ];

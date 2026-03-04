@@ -12,6 +12,15 @@
     <a href="/admin/projects" class="{{ request()->is('admin/projects*') ? 'active' : '' }}">
       💼 Projects
     </a>
+    <a href="/admin/capabilities" class="{{ request()->is('admin/capabilities*') ? 'active' : '' }}">
+      Kemampuan
+    </a>
+    <a href="/admin/certifications" class="{{ request()->is('admin/certifications*') ? 'active' : '' }}">
+      Sertifikasi
+    </a>
+    <a href="/admin/educations" class="{{ request()->is('admin/educations*') ? 'active' : '' }}">
+      🧭 Perjalanan Karir
+    </a>
     <a href="/admin/documentations" class="{{ request()->is('admin/documentations*') ? 'active' : '' }}">
       📁 Dokumentasi
     </a>
@@ -157,3 +166,5 @@
     });
   });
 </script>
+
+

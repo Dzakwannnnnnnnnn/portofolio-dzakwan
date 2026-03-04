@@ -33,9 +33,16 @@ class ProfileController extends Controller
             'birth_date' => 'nullable|date',
             'last_education' => 'nullable',
             'location' => 'nullable',
+            'experience_years' => 'nullable|integer|min:0',
+            'total_projects' => 'nullable|integer|min:0',
+            'total_certifications' => 'nullable|integer|min:0',
             'github' => 'nullable',
             'instagram' => 'nullable',
-            'photo' => 'nullable|image'
+            'photo' => 'nullable|image|max:5120'
+        ], [
+            'photo.image' => 'File foto harus berupa gambar.',
+            'photo.max' => 'Ukuran foto maksimal 5MB.',
+            'photo.uploaded' => 'Upload foto gagal. Pastikan ukuran file tidak lebih dari 5MB.'
         ]);
 
         if ($request->hasFile('photo')) {
@@ -69,9 +76,16 @@ class ProfileController extends Controller
             'birth_date' => 'nullable|date',
             'last_education' => 'nullable',
             'location' => 'nullable',
+            'experience_years' => 'nullable|integer|min:0',
+            'total_projects' => 'nullable|integer|min:0',
+            'total_certifications' => 'nullable|integer|min:0',
             'github' => 'nullable',
             'instagram' => 'nullable',
-            'photo' => 'nullable|image'
+            'photo' => 'nullable|image|max:5120'
+        ], [
+            'photo.image' => 'File foto harus berupa gambar.',
+            'photo.max' => 'Ukuran foto maksimal 5MB.',
+            'photo.uploaded' => 'Upload foto gagal. Pastikan ukuran file tidak lebih dari 5MB.'
         ]);
 
         if ($request->hasFile('photo')) {
