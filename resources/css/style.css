@@ -562,6 +562,83 @@ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
     transition:none;
 }
 
+.project-meta{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom:12px;
+}
+
+.project-role-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 12px;
+    border-radius:999px;
+    background:#eef2ff;
+    color:#4338ca;
+    font-size:12px;
+    font-weight:700;
+}
+
+.project-description{
+    line-height:1.6;
+    min-height:68px;
+}
+
+.project-tech-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:14px 0 18px;
+}
+
+.project-tech-chip{
+    display:inline-flex;
+    align-items:center;
+    padding:7px 11px;
+    border-radius:999px;
+    background:#f8fafc;
+    border:1px solid #dbeafe;
+    color:#1d4ed8;
+    font-size:12px;
+    font-weight:700;
+}
+
+.project-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:6px;
+}
+
+.project-action-btn{
+    display:inline-flex !important;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:12px;
+    font-size:13px !important;
+    font-weight:700;
+    text-decoration:none;
+    border:1px solid transparent;
+}
+
+.project-action-primary{
+    background:#111827;
+    color:#fff !important;
+}
+
+.project-action-secondary{
+    background:#fff;
+    color:#111827 !important;
+    border-color:#d1d5db;
+}
+
+.project-empty-link{
+    margin-top:12px;
+    font-size:13px !important;
+    color:#94a3b8 !important;
+}
+
 .project-link{
     display:inline-block;
     margin-top:10px;

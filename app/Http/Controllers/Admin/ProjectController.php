@@ -22,11 +22,16 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image',
-            'link' => 'nullable'
+            'github_url' => 'nullable|url|max:255',
+            'demo_url' => 'nullable|url|max:255',
+            'technologies' => 'nullable|string|max:1000',
+            'project_role' => 'nullable|string|max:255',
         ]);
+
+        $data['link'] = $data['demo_url'] ?? null;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('projects', 'public');
@@ -48,11 +53,16 @@ class ProjectController extends Controller
         $project = Projects::findOrFail($id);
 
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image',
-            'link' => 'nullable'
+            'github_url' => 'nullable|url|max:255',
+            'demo_url' => 'nullable|url|max:255',
+            'technologies' => 'nullable|string|max:1000',
+            'project_role' => 'nullable|string|max:255',
         ]);
+
+        $data['link'] = $data['demo_url'] ?? null;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('projects', 'public');

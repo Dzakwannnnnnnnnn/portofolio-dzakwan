@@ -46,7 +46,7 @@ $instagramUrl = \Illuminate\Support\Str::startsWith($instagramRaw, ['http://', '
         <p class="hero-desc">
             Saya <b>{{ $profile->name ?? 'Muhammad Dzakwan' }}</b>,
             seorang {{ $profile->title ?? 'Full-stack Developer' }}
-            yang sedang menempuh pendidikan di SMK TI Airlangga. Saya memiliki minat dalam membangun website yang modern, cepat, dan rapi, serta terus mengembangkan kemampuan saya melalui berbagai proyek pengembangan web
+            yang sedang menempuh pendidikan di SMK TI Airlangga dan fokus membangun website yang modern, cepat, dan rapi.
         </p>
 
         <div class="hero-skills" aria-label="Programming Skills">
@@ -1149,6 +1149,10 @@ $instagramUrl = \Illuminate\Support\Str::startsWith($instagramRaw, ['http://', '
         <div class="projects-grid">
 
             @forelse($projects ?? [] as $project)
+            @php
+            $projectDemoUrl = $project->demo_url;
+            $projectTechnologies = array_values(array_filter(array_map('trim', explode(',', (string) ($project->technologies ?? '')))));
+            @endphp
 
             <div class="project-card">
 
@@ -1158,16 +1162,42 @@ $instagramUrl = \Illuminate\Support\Str::startsWith($instagramRaw, ['http://', '
 
                 <div class="project-body">
 
+                    <div class="project-meta">
+                        <span class="project-role-badge">{{ $project->project_role ?: 'Project pribadi' }}</span>
+                    </div>
+
                     <h4>{{ $project->title ?? 'Untitled Project' }}</h4>
 
-                    <p>
+                    <p class="project-description">
                         {{ $project->description ?? 'Belum ada deskripsi project.' }}
                     </p>
 
-                    @if(!empty($project->link))
-                    <a href="{{ $project->link }}" target="_blank">
-                        View Project
-                    </a>
+                    @if(!empty($projectTechnologies))
+                    <div class="project-tech-list" aria-label="Teknologi project">
+                        @foreach($projectTechnologies as $technology)
+                        <span class="project-tech-chip">{{ $technology }}</span>
+                        @endforeach
+                    </div>
+                    @endif
+
+                    <div class="project-actions">
+                        @if(!empty($project->github_url))
+                        <a href="{{ $project->github_url }}" target="_blank" rel="noopener noreferrer" class="project-action-btn project-action-secondary">
+                            <i class="bi bi-github"></i>
+                            <span>Code Git</span>
+                        </a>
+                        @endif
+
+                        @if(!empty($projectDemoUrl))
+                        <a href="{{ $projectDemoUrl }}" target="_blank" rel="noopener noreferrer" class="project-action-btn project-action-primary">
+                            <i class="bi bi-box-arrow-up-right"></i>
+                            <span>Lihat Web</span>
+                        </a>
+                        @endif
+                    </div>
+
+                    @if(empty($project->github_url) && empty($projectDemoUrl))
+                    <p class="project-empty-link">Link code atau demo belum ditambahkan.</p>
                     @endif
 
                 </div>

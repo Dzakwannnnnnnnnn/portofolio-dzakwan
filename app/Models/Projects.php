@@ -10,6 +10,10 @@ class Projects extends Model
         'title',
         'description',
         'image',
-        'link'
+        'link',
+        'github_url',
+        'demo_url',
+        'technologies',
+        'project_role',
     ];
 }

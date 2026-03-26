@@ -19,7 +19,7 @@
       <tr>
         <th style="width: 90px;">Image</th>
         <th>Project</th>
-        <th>Link</th>
+        <th>Detail</th>
         <th style="width: 170px;">Aksi</th>
       </tr>
     </thead>
@@ -38,10 +38,16 @@
           <p class="project-desc">{{ $project->description ?: 'Belum ada deskripsi project.' }}</p>
         </td>
         <td>
-          @if($project->link)
-          <a class="project-link" href="{{ $project->link }}" target="_blank" rel="noopener noreferrer">Buka Link</a>
-          @else
-          <span class="muted">Tidak ada link</span>
+          <p class="project-desc"><strong>Peran:</strong> {{ $project->project_role ?: '-' }}</p>
+          <p class="project-desc"><strong>Teknologi:</strong> {{ $project->technologies ?: '-' }}</p>
+          @if($project->github_url)
+          <a class="project-link" href="{{ $project->github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+          @endif
+          @if($project->demo_url)
+          <a class="project-link" href="{{ $project->demo_url }}" target="_blank" rel="noopener noreferrer">Demo Web</a>
+          @endif
+          @if(!$project->github_url && !$project->demo_url)
+          <span class="muted">Belum ada link</span>
           @endif
         </td>
         <td>
