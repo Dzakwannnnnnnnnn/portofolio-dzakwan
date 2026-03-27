@@ -16,7 +16,8 @@
   <textarea name="description">{{ old('description', $project->description) }}</textarea>
 
   <label>Image</label>
-  <input type="file" name="image">
+  <input type="file" name="image" accept="image/*">
+  <small>Maksimal 10 MB.</small>
 
   <label>GitHub Code URL</label>
   <input type="text" name="github_url" value="{{ old('github_url', $project->github_url) }}" placeholder="https://github.com/username/repository">
